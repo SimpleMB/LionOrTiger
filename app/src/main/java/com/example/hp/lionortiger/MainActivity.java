@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     Player currentPlayer = Player.one;
     Player playerChoice[] = new Player[9];
     TextView playerNumber;
+    String win;
+    boolean isItWon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,71 +29,88 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-    public void buttonIsTapped (View imageView) {
-
-        ImageView imageTaped = (ImageView) imageView;
-        int imgViewTag = Integer.parseInt(imageTaped.getTag().toString());
-        playerChoice [imgViewTag] = currentPlayer;
-
-        imageTaped.setTranslationX(-2000);
-        imageTaped.setRotation(0);
-
-        if (currentPlayer == Player.one) {
-
-            imageTaped.setImageResource(R.drawable.tiger);
-            currentPlayer = Player.two;
-            playerNumber.setText("Player TWO");
-
-
-        } else {
-
-            imageTaped.setImageResource(R.drawable.lion);  // Setting image to be placed in selected ImageView
-            currentPlayer = Player.one;                     // Changing player
-            playerNumber.setText("Player ONE");
-
-
-        }
-
-        imageTaped.animate().translationXBy(2000).setDuration(300).alpha(1).rotation(3600);
-
-        checkWinner();
-    }
-
-    public void checkWinner () {
+    public void checkWinner() {
 
         if (playerChoice[0] != null && playerChoice[3] != null && playerChoice[6] != null && playerChoice[0] == playerChoice[3] && playerChoice[3] == playerChoice[6]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[1] != null && playerChoice[4] != null && playerChoice[7] != null && playerChoice[1] == playerChoice[4] && playerChoice[4] == playerChoice[7]) {
+        } else if (playerChoice[1] != null && playerChoice[4] != null && playerChoice[7] != null && playerChoice[1] == playerChoice[4] && playerChoice[4] == playerChoice[7]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[2] != null && playerChoice[5] != null && playerChoice[8] != null && playerChoice[2] == playerChoice[5] && playerChoice[5] == playerChoice[8]) {
+        } else if (playerChoice[2] != null && playerChoice[5] != null && playerChoice[8] != null && playerChoice[2] == playerChoice[5] && playerChoice[5] == playerChoice[8]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[0] != null && playerChoice[1] != null && playerChoice[2] != null && playerChoice[0] == playerChoice[1] && playerChoice[1] == playerChoice[2]) {
+        } else if (playerChoice[0] != null && playerChoice[1] != null && playerChoice[2] != null && playerChoice[0] == playerChoice[1] && playerChoice[1] == playerChoice[2]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[3] != null && playerChoice[4] != null && playerChoice[5] != null && playerChoice[3] == playerChoice[4] && playerChoice[4] == playerChoice[5]) {
+        } else if (playerChoice[3] != null && playerChoice[4] != null && playerChoice[5] != null && playerChoice[3] == playerChoice[4] && playerChoice[4] == playerChoice[5]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[6] != null && playerChoice[7] != null && playerChoice[8] != null && playerChoice[6] == playerChoice[7] && playerChoice[7] == playerChoice[8]) {
+        } else if (playerChoice[6] != null && playerChoice[7] != null && playerChoice[8] != null && playerChoice[6] == playerChoice[7] && playerChoice[7] == playerChoice[8]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[0] != null && playerChoice[4] != null && playerChoice[8] != null && playerChoice[0] == playerChoice[4] && playerChoice[4] == playerChoice[8]) {
+        } else if (playerChoice[0] != null && playerChoice[4] != null && playerChoice[8] != null && playerChoice[0] == playerChoice[4] && playerChoice[4] == playerChoice[8]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
+            playerNumber.setText(win);
+            isItWon = true;
 
-            } else if (playerChoice[2] != null && playerChoice[4] != null && playerChoice[6] != null && playerChoice[2] == playerChoice[4] && playerChoice[4] == playerChoice[6]) {
+        } else if (playerChoice[2] != null && playerChoice[4] != null && playerChoice[6] != null && playerChoice[2] == playerChoice[4] && playerChoice[4] == playerChoice[6]) {
 
-                playerNumber.setText(currentPlayer + " wygrał!");
-            }
+            playerNumber.setText(win);
+            isItWon = true;
         }
     }
+
+
+    public void buttonIsTapped(View imageView) {
+
+        ImageView imageTaped = (ImageView) imageView;
+
+        int imgViewTag = Integer.parseInt(imageTaped.getTag().toString());
+        if (playerChoice[imgViewTag] == null && !isItWon) {
+
+            playerChoice[imgViewTag] = currentPlayer;
+
+
+            imageTaped.setTranslationX(-2000);
+            imageTaped.setRotation(0);
+
+            if (currentPlayer == Player.one) {
+
+                imageTaped.setImageResource(R.drawable.tiger);
+                win = "Player ONE wygrał";
+                currentPlayer = Player.two;
+                playerNumber.setText("Player TWO");
+
+
+            } else {
+
+                imageTaped.setImageResource(R.drawable.lion); // Setting image to be placed in selected ImageView
+                win = "Player TWO wygrał";
+                currentPlayer = Player.one;                     // Changing player
+                playerNumber.setText("Player ONE");
+
+
+            }
+
+            imageTaped.animate().translationXBy(2000).setDuration(300).alpha(1).rotation(3600);
+
+            checkWinner();
+
+        }
+
+
+    }
+}
