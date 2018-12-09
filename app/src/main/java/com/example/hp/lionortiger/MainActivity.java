@@ -3,22 +3,26 @@ package com.example.hp.lionortiger;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.support.v7.widget.GridLayout;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    enum Player {
+    private enum Player {
         one, two, none
     }
 
-    Player currentPlayer = Player.one;
-    Player playerChoice[] = new Player[9];
+    private Player currentPlayer = Player.one;
+    private Player playerChoice[] = new Player[9];
     int [][] winnerRowsColumns = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
-    TextView playerNumber;
-    String win;
-    boolean isItWon;
-    Player acctualPlayer;
+    private TextView playerNumber;
+    private String win;
+    private boolean isItWon;
+    private Player acctualPlayer;
+    private GridLayout gridLayout;
+    Button gameReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         playerChoice [6] = Player.none;
         playerChoice [7] = Player.none;
         playerChoice [8] = Player.none;
+        gridLayout = findViewById(R.id.gridLayout);
+        gameReset = findViewById(R.id.buttonReset);
+
+        gameReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameReset();
+            }
+        });
+
+
 
 
     }
@@ -133,6 +148,33 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+
+    }
+
+    public void gameReset() {
+
+        isItWon = false;
+        playerChoice [0] = Player.none;
+        playerChoice [1] = Player.none;
+        playerChoice [2] = Player.none;
+        playerChoice [3] = Player.none;
+        playerChoice [4] = Player.none;
+        playerChoice [5] = Player.none;
+        playerChoice [6] = Player.none;
+        playerChoice [7] = Player.none;
+        playerChoice [8] = Player.none;
+        playerNumber.setText("Player ONE");
+        currentPlayer = Player.one;
+
+        for (int index = 0; index < gridLayout.getChildCount(); index++) {
+
+            ImageView imageView = (ImageView) gridLayout.getChildAt(index);
+            imageView.setImageDrawable(null);
+            imageView.setAlpha(0f);
+
+        }
+
 
 
     }
