@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Player acctualPlayer;
     private GridLayout gridLayout;
     Button gameReset;
+    private String winMsgPlayerOne;
+    private String winMsgPlayerTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         playerNumber = findViewById(R.id.playerNumber);
         playerNumber.setText(getString(R.string.playerOne));
+
+        winMsgPlayerOne = getString(R.string.winMsgPlayerOne);
+        winMsgPlayerTwo = getString(R.string.winMsgPlayerTwo);
+
        /* playerChoice [0] = Player.none;
         playerChoice [1] = Player.none;
         playerChoice [2] = Player.none;
@@ -144,8 +150,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (playerChoice[winnerColumns[0]] == playerChoice[winnerColumns[1]] && playerChoice[winnerColumns[1]] == playerChoice[winnerColumns[2]] && playerChoice[winnerColumns[0]] != Player.none) {
 
+                    if (acctualPlayer == Player.one) {
+                        playerNumber.setText(getString(R.string.winMsgPlayerOne));
+                    } else {
+                        playerNumber.setText(getString(R.string.winMsgPlayerTwo));
+                    }
 
-                    playerNumber.setText("Player " + acctualPlayer + " won!");
                     isItWon = true;
                 }
 
