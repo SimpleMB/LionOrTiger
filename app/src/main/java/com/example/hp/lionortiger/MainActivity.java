@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Player playerChoice[] = new Player[9];
     int [][] winnerRowsColumns = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
     private TextView playerNumber;
-    private String win;
+    //private String win;
     private boolean isItWon;
     private Player acctualPlayer;
     private GridLayout gridLayout;
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         playerNumber = findViewById(R.id.playerNumber);
-        playerNumber.setText("Player ONE");
-        playerChoice [0] = Player.none;
+        playerNumber.setText(getString(R.string.playerOne));
+       /* playerChoice [0] = Player.none;
         playerChoice [1] = Player.none;
         playerChoice [2] = Player.none;
         playerChoice [3] = Player.none;
@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
         playerChoice [5] = Player.none;
         playerChoice [6] = Player.none;
         playerChoice [7] = Player.none;
-        playerChoice [8] = Player.none;
+        playerChoice [8] = Player.none; */
+
+       for (int index = 0; index < playerChoice.length; index++) {
+           playerChoice[index] = Player.none;
+       }
         gridLayout = findViewById(R.id.gridLayout);
         gameReset = findViewById(R.id.buttonReset);
 
@@ -116,26 +120,26 @@ public class MainActivity extends AppCompatActivity {
             if (currentPlayer == Player.one) {
 
                 imageTaped.setImageResource(R.drawable.tiger);
-                win = "Player ONE wygrał";
+                //win = getString(R.string.winOne);     // Get string from string res file
                 acctualPlayer = Player.one;
                 currentPlayer = Player.two;
-                playerNumber.setText("Player TWO");
+                playerNumber.setText(getString(R.string.playerTwo)); // Get string from string res file
 
 
             } else {
 
                 imageTaped.setImageResource(R.drawable.lion); // Setting image to be placed in selected ImageView
-                win = "Player TWO wygrał";
+                //win = getString(R.string.winTwo);
                 acctualPlayer = Player.two;
                 currentPlayer = Player.one;                     // Changing player
-                playerNumber.setText("Player ONE");
+                playerNumber.setText(getString(R.string.playerOne));   // Get string from string res file
 
 
             }
 
             imageTaped.animate().translationXBy(2000).setDuration(300).alpha(1).rotation(3600);
 
-//            checkWinner();
+//            check Winner
             for (int[] winnerColumns: winnerRowsColumns ) {
 
                 if (playerChoice[winnerColumns[0]] == playerChoice[winnerColumns[1]] && playerChoice[winnerColumns[1]] == playerChoice[winnerColumns[2]] && playerChoice[winnerColumns[0]] != Player.none) {
@@ -155,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     public void gameReset() {
 
         isItWon = false;
-        playerChoice [0] = Player.none;
+        /*playerChoice [0] = Player.none;
         playerChoice [1] = Player.none;
         playerChoice [2] = Player.none;
         playerChoice [3] = Player.none;
@@ -163,8 +167,12 @@ public class MainActivity extends AppCompatActivity {
         playerChoice [5] = Player.none;
         playerChoice [6] = Player.none;
         playerChoice [7] = Player.none;
-        playerChoice [8] = Player.none;
-        playerNumber.setText("Player ONE");
+        playerChoice [8] = Player.none; */
+
+        for (int index = 0; index < playerChoice.length; index++) {
+            playerChoice[index] = Player.none;
+        }
+        playerNumber.setText(getString(R.string.playerTwo));
         currentPlayer = Player.one;
 
         for (int index = 0; index < gridLayout.getChildCount(); index++) {
